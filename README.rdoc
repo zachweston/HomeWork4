@@ -1,0 +1,44 @@
+== README
+
+This is the USMA CS450 HomeWork4.
+The project is currently at about the end of Hartl Chapter 6 with some modifications for the current Ruby on Rails version.
+
+== Software versions
+* Ruby 1.9.3p547 (2014-05-14 revision 45962) [x86_64-linux]
+* Rails 4.1.6
+* gem 2.4.1
+* heroku-toolbelt/3.11.1 (x86_64-linux) ruby/1.9.3
+
+== Setup your development and test environment
+* After cloneing you will need to configure the application for your
+development environment.
+ bundle install --without production
+
+* Then migrate any existing database schema.
+ bundle exec rake db:migrate
+
+* Next run the test suite.  It is is RSpec based.  To run all existing test cases in the spec directory use:
+ bundle exec rspec spec
+
+* You'll want to setup your own remote repository on GitHub.  Remove the current origin with
+ git remote rm origin
+  
+* Then create an empty repository on GitHub.  Finally, add an origin nickname back in for your remote repository on GitHub.
+
+== Deployment into production environment
+* You will need to setup your own instance of a heroku environment.  
+ heroku create --stack cedar
+* Precompile assets, them commit them to local git repo and remote git repo on GitHub.
+ rake assets:precompile
+ git add .
+ git commit -m "Precompile assets"
+ git push origin
+* Deploy to your production environment on the heroku servers using:
+ git push heroku master
+* If you need to perform a database migration on heroku you'll need to use:
+ heroku run:detached rake db:migrate
+* Then you can view your application with
+ heroku open
+
+
+
